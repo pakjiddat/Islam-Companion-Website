@@ -1,0 +1,23 @@
+<!-- The template for displaying text of the first hadith -->
+<template id="template-first">
+  <div class="[lang-css] [lang-dir]-text">
+    <div class="hadith-title">[hadith-title]</div>
+  </div>
+  <div class="[lang-css] [lang-dir]-text">
+    <div>[hadith-text]</div>
+  </div>
+</template>
+
+<!-- The template for displaying text of the hadith which is not the first hadith -->
+<template id="template-not-first">
+  <div class="[lang-css] [lang-dir]-text">
+    <div>[hadith-text]</div>
+  </div>
+</template>
+
+<!-- The template for displaying hadith meta text -->
+<template id="meta-template">
+  <div class="text-meta [lang-css] [lang-dir]-text">[hadith-source] - [hadith-book] - [hadith-number]</div>
+</template>
+
+{search_template}

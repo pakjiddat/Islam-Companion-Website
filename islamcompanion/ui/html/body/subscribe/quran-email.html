@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <title>{title}</title>
+      {font_tags}  
+      <style>
+        .center-align {text-align: center;}
+
+        .bold-text {font-weight: bold;}
+
+        #verse-meta > tbody > tr > td {text-align: left;}
+
+        #verse-meta {margin-left: auto; margin-right: auto;}
+
+        .rtl-list {
+          list-style-type: arabic-indic;
+          direction: rtl;
+          text-align: right;
+          font-family: NafeesWeb;
+        }
+
+        .rtl-text {
+          font-size: 16pt;
+          direction: rtl;
+          line-height: 40px;
+          text-align: right;
+          word-wrap: break-word;
+          font-weight: bold;
+        }       
+
+        .ltr-text {
+          font-size: 12pt;
+          line-height: 30px;
+          word-wrap: break-word;
+          font-weight: bold;
+        }
+
+        .rtl-text > li {
+          margin-left: 15px;
+          padding-right: 10px;
+        }
+
+        footer > span {
+          font-size: 12pt;
+        }
+
+        .verse-meta-data {
+          font-size: 12pt;
+          color: green;
+        }
+
+        /** Firefox specific style */
+        @-moz-document url-prefix() {
+          .rtl-list {
+            list-style-type: arabic-indic;
+            direction: rtl;
+            text-align: right;
+            font-family: NafeesWeb;
+          }
+        }
+    </style>        
+   </head>
+   <body>
+   <header>
+     <h2 class="center-align">Holy Quran</h2>
+   </header>
+   <hr/>
+   <table id="verse-meta">
+     <tbody>
+       <tr>
+         <td class="bold-text">Narrator</td>
+         <td>&nbsp;</td>
+         <td>{narrator}</td>
+       </tr>
+       <tr>
+         <td class="bold-text">Sura</td>
+         <td>&nbsp;</td>         
+         <td>{sura}</td>            
+       </tr>
+       <tr>
+         <td class="bold-text">Language</td>      
+         <td>&nbsp;</td>            
+         <td>{language}</td>
+       </tr>
+       <tr>
+         <td class="bold-text">Ayas</td>         
+         <td>&nbsp;</td>         
+         <td>{start_ayat} - {end_ayat}</td>         
+       </tr>
+     </tbody>
+   </table>
+   <hr/>
+   <article>
+     <ol class="{css_classes}">
+       {body}
+     </ol>
+   </article>
+   <hr/>
+   <footer class="center-align">
+       <span>
+         Powered by <a href='http://www.pakjiddat.pk'>Pak Jiddat</a> - 
+         <a href='{unsubscribe_link}'>Unsubscribe</a>
+       </span>       
+   </footer>
+   </body>
+</html>

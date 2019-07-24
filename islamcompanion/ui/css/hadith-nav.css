@@ -1,0 +1,8 @@
+.hadith-title {
+  margin-bottom: 20px;
+  font-size: 120%;
+}
+
+#hadith-navigation > div > div > label {
+  font-size: initial;
+}

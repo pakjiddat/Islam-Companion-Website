@@ -1,0 +1,38 @@
+url: ^/$
+callback: {"object": "homepage", "function": "Generate"}
+
+url: ^/holy-quran$
+callback: {"object": "holyquranpage", "function": "Generate"}
+
+url: ^/hadith$
+callback: {"object": "hadithpage", "function": "Generate"}
+
+url: ^/subscribe/form$
+callback: {"object": "subscriptionpage", "function": "Generate"}
+
+url: ^/subscribe/email$
+callback: {"object": "subscriptioncronjob", "function": "EmailSubscribers"}
+
+url: ^/subscribe/add$
+callback: {"object": "subscriptionform", "function": "AddSubscriber"}
+
+url: ^/subscribe/remove/\?.+$
+callback: {"object": "subscriptionform", "function": "RemoveSubscriber"}
+
+url: ^/contact/form$
+callback: {"object": "contactpage", "function": "Generate"}
+
+url: ^/contact/add$
+callback: {"object": "contactpage", "function": "SendContactMessage"}
+
+url: ^/hadith-download$
+callback: {"object": "hadithdownloadpage", "function": "Generate"}
+
+url: ^/hadith-download/email$
+callback: {"object": "hadithdownloadpage", "function": "EmailDownloadLink"}
+
+url: ^/download-file/\?.+$
+callback: {"object": "hadithdownloadpage", "function": "DownloadFile"}
+
+command: Upload Audio Files
+callback: {"object": "websitetools", "function": "UploadAudioFiles"}

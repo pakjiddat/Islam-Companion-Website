@@ -1,0 +1,43 @@
+<!-- The navigator -->
+<main id="navigator">
+  <!-- The top section -->
+  <article class="p-4 m-4 bg-warning card" id="navigator-inner">
+    <header class="row">
+      <div class="form-control-inline col-lg-6">
+        <button type="button" data-toggle="collapse" data-target="#options" class="btn btn-success btn-lg fas fa-tools" id="settings" title="Options"></button>
+      </div>
+      <div class="form-control-inline col-lg-6">
+        <div class="float-right">
+          <button type="button" class="btn btn-success btn-lg fas fa-angle-double-left" id="next" title="Next {item_name}">
+          </button>
+          <button type="button" class="btn btn-success btn-lg fas fa-angle-double-right" id="prev" title="Previous {item_name}">
+          </button>
+          <button type="button" class="btn btn-success btn-lg fas fa-random" id="random" title="Random {item_name}">
+          </button>            
+        </div>
+      </div>
+    </header>
+    <div id="options" class="collapse mt-4">
+      <!-- Nav tabs -->
+      {tabs}
+    </div>
+    <!-- The top section ends -->
+    <hr/>
+    <!-- The navigator text -->
+    <ol id="navigator-text">
+    </ol>
+    <!-- The navigator text ends -->
+  </article>
+</main>
+
+<!-- The overlay for the Navigator -->
+<div id="overlay">
+  <div id="overlay-text">Loading . . .</div>
+</div>
+
+{templates}
+
+<!-- A temprary container for search results heading -->
+<div id="temp-container"></div>
+
+{scroll}

@@ -1,0 +1,32 @@
+<!-- The Subscription section -->
+<main id="subscription">
+  <!-- The top section -->
+  <section class="card bg-light p-4 m-4 w-50 mx-auto" id="subscription-inner">
+  <header class="mb-4">
+    <h4 class="text-center">Get Holy Quran and Hadith by email</h4>
+    </header>
+    <p>
+      Enter your email address. You will get an email once a day
+    </p>
+      <form id="subscription-form" class="mt-3">
+        <div class="form-group">
+          <label for="email"><b>Email address <span class="required">*</span> :</b></label>
+          <input type="email" class="form-control" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="type"><b>Type <span class="required">*</span> :</b></label>
+          <select id="type" class="form-control">
+            <option selected value="Holy Quran">Holy Quran</option>
+            <option value="Hadith">Hadith</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary mt-3" id="subscribe-button">Submit</button>
+      </form>
+  </section>
+</main>
+
+<!-- The overlay for the Subscription page -->
+<div id="overlay">
+  <div id="overlay-text">Loading . . .</div>
+</div>
+

@@ -1,0 +1,139 @@
+.rtl-text {
+  font-size: 16pt;
+  direction: rtl;
+  line-height: 50px;
+  text-align: right;
+  word-wrap: break-word;
+  font-weight: bold;
+  width: 100%;
+}
+
+.ltr-text {
+  font-size: 13pt;
+  direction: ltr;
+  line-height: 30px;
+  text-align: left;
+  word-wrap: break-word;
+  font-weight: bold;
+  width: 100%;
+}
+
+.rtl-button {
+  font-size: 14pt;
+  direction: rtl;
+  line-height: 20px;
+  text-align: right;
+  word-wrap: break-word;
+  font-weight: bold;
+  padding-right: 15px;
+}
+
+.rtl-list {
+  list-style-type: arabic-indic;
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr-list {
+  list-style-type: decimal;
+  direction: ltr;
+  text-align: left;
+}
+
+.rtl-dropdown {
+  font-size: 13pt;
+  direction: rtl;
+  line-height: 20px;
+  text-align: right;
+  word-wrap: break-word;
+  font-weight: bold;
+  padding-right: 25px;
+}
+
+.rtl-dropdown-arabic {
+  font-size: 12pt;
+}
+
+.rtl-tab {
+  direction: rtl;
+}
+
+.urdu {
+  font-family: NafeesWeb;
+}
+
+.arabic {
+  font-family: amiri-quran;
+}
+
+.underline {
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+}
+
+.text-meta {
+  color: green;
+  display: block;
+  font-weight: bold;  
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.rtl-search {
+  direction: rtl;
+}
+
+#search-text {
+  font-size: 16pt;
+  font-weight: bold;
+  flex: none;
+  width: 65%;
+}
+
+#temp-container {
+  display: none;
+}
+
+.highlighted-text {
+  color: green;
+  font-weight: bold;
+}
+
+#no-results {
+  text-align: center;
+  direction: ltr;
+}
+
+@media screen and (max-width: 576px) {
+  #search-text, #email-address {
+    width: 75%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #email-address {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  #email-address {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  #prev-page, #next-page, #page-list {
+    margin-bottom: 30px;
+  }
+}
+
+.rtl-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+}

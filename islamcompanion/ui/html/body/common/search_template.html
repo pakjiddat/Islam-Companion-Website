@@ -1,0 +1,19 @@
+<!-- The template for displaying search results heading -->
+<template id="search-heading-template">
+  <div class="row">
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-success btn-lg fas fa-angle-double-left" id="prev-page" title="Previous Page"></button>
+    </div>    
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-success btn-lg fas fa-angle-double-right" id="next-page" title="Next Page">
+      </button>
+    </div>
+    <div class="col-sm-7">
+      <div class="form-inline font-weight-bold">
+        <label for="page-list" class="mr-2">Page: </label>
+        <select name="page-list" id="page-list" class="font-weight-bold custom-select-sm form-control mr-2 w-25"></select>
+        <label for="page-list" class="mr-2"> of [page_count]</label>
+      </div>
+    </div>
+  </div>
+</template>
