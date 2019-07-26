@@ -152,9 +152,9 @@ class SubscriptionEmail
             /** The hadith source */
             $source    = $data[$count]['source'];
             /** The hadith number */
-            $number    = $data[$count]['hadith_number'];
+            $number    = $data[$count]['number'];
             /** The hadith text */
-            $text      = $data[$count]['hadith_text'];
+            $text      = $data[$count]['text'];
             /** The hadith text is sanitized */
             $text      = strip_tags($text);
                         

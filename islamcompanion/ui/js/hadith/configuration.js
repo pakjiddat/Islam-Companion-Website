@@ -30,21 +30,7 @@ export class Config {
         /** The css classes for custom fonts */
         this.font_classes     = ["urdu", "arabic"];
         /** The current layout */
-        this.layout           = "single-column";     
-        /** Indicates if the website is in development mode */
-        this.dev_mode         = true;
-        /** If the website is in development mode */
-        if (this.dev_mode) {
-            /** The site url is set */
-            this.site_url     = "http://dev.islamcompanion.pakjiddat.pk";
-        }
-        /** If the website is in production mode */
-        else {
-            /** The site url is set */
-            this.site_url     = "https://islamcompanion.pakjiddat.pk";
-        }
-        /** An object of class NavigatorCommon */
-        this.nav_common       = "";
+        this.layout           = "single-column";
         /** The current navigator type */
         this.type             = "hadith";
     }

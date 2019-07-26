@@ -2,6 +2,7 @@
 
 import { Search } from './components/search.js';
 import { Subscription } from './../common/subscription.js';
+import { Utilities } from './../common/utilities.js';
 import { CommonEventHandlers } from './../common/event-handlers.js';
 
 /** The EventHandlers class */
@@ -56,7 +57,7 @@ export class EventHandlers extends CommonEventHandlers {
         /** If the action is language_box */
         else if (action == "language_box") {
             /** The narrator list box is updated */
-            this.navigator.LoadNavigator("narrator");
+            this.navigator.LoadNavigator("narrator", false);
             /** The components to update */
             components            = "verse";
         }
@@ -77,6 +78,10 @@ export class EventHandlers extends CommonEventHandlers {
         }        
         /** If the action is next, prev or random */
         else if (action == "next" || action == "prev" || action == "random") {
+        
+            /** An object of Utilities class is created */
+            let utilities  = new Utilities();
+            
             /** If the new division is not same as current division and the division is not ruku */
             if (document.getElementById('division-number-list').value != this.config.div_num
                && this.config.division != "ruku"
@@ -85,7 +90,7 @@ export class EventHandlers extends CommonEventHandlers {
                 document.getElementById('division-number-list').value = this.config.div_num;
             }
             /** If the new sura is not in the sura list */
-            if (!this.config.nav_common.IsItemPresent(this.config.sura, "sura-list")) {
+            if (!utilities.IsItemPresent(this.config.sura, "sura-list")) {
                 /** The sura list is marked for update */
                 components          += ",sura";
             }
@@ -101,7 +106,7 @@ export class EventHandlers extends CommonEventHandlers {
             }
             
             /** If the new ruku is not in the ruku list */
-            if (!this.config.nav_common.IsItemPresent(this.config.sura_ruku, "ruku-list")) {
+            if (!utilities.IsItemPresent(this.config.sura_ruku, "ruku-list")) {
                 /** The ruku list is marked for update */
                 components          += ",ruku";
             }
@@ -152,6 +157,18 @@ export class EventHandlers extends CommonEventHandlers {
             this.config.language  = document.getElementById("language-list").value;
             /** The current narrator is set to the selected narrator */
             this.config.narrator  = document.getElementById("narrator-list").value;
+            /** If the language is rtl */
+            if (this.config.ltr_langs.indexOf(this.config.language) < 0) {
+                /** The language direction is set to rtl */
+                this.config.is_rtl = "yes";
+            }
+            /** The language direction is set to rtl */
+            else {
+                this.config.is_rtl = "no";
+            }
+
+            /** The button event handlers are registered again */
+            this.RegisterNextPrevEventHandlers();
         }
         /** If the action is narrator_box */
         else if (action == "narrator_box") {
@@ -184,7 +201,7 @@ export class EventHandlers extends CommonEventHandlers {
         }
         else {
             /** The url used to make the request */
-            var url            = this.config.site_url + "/api/get_quran_nav_config";
+            var url            = "/api/get_quran_nav_config";
             /** The app config is updated */
             this.UpdateAppConfig(action);
             /** The parameters for the request */

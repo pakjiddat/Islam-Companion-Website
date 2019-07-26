@@ -1,5 +1,7 @@
 "use strict";
 
+import { Utilities } from './../../common/utilities.js';
+
 /** The DivisionList class */
 export class DivisionList {
 
@@ -11,8 +13,9 @@ export class DivisionList {
         
     /** Used to update the division list */
     UpdateDivisionList () {
-        /** The common navigator related functions */
-        let nav_common = this.config.nav_common;
+    
+        /** An object of Utilities class is created */
+        let utilities       = new Utilities();
         /** If the current division is not ruku, then the division box is made visible */
         if (this.config.division != "ruku") {
             /** The number of items in the division */
@@ -26,9 +29,9 @@ export class DivisionList {
             /** The division number box label is set */
             document.getElementById("division-label").innerHTML = label; 
             /** The range of number is generated */
-            var number_list                                     = this.config.nav_common.Range(1, item_count);
+            var number_list                                     = utilities.Range(1, item_count);
             /** The division list is updated */
-            nav_common.PopulateSelectBox("division-number-list", number_list, this.config.div_num, "");
+            utilities.PopulateSelectBox("division-number-list", number_list, this.config.div_num, "");
             /** The width of the sura section is reduced */
             document.getElementById("sura-section").classList.remove("col-lg-4");
             /** The width of the sura section is reduced */

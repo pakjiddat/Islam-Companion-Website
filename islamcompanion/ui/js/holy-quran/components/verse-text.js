@@ -1,5 +1,8 @@
 "use strict";
 
+import { Utilities } from './../../common/utilities.js';
+import { NavigatorCommon } from './../../common/navigator.js';
+
 /** The VerseText class */
 export class VerseText {
 
@@ -10,66 +13,62 @@ export class VerseText {
     }
         
     /** Used to update the verse text */
-    UpdateVerseText () {
+    UpdateVerseText(is_async) {
 
+        /** An object of Utilities class is created */
+        let utilities  = new Utilities();
+        
         /** The ayat range is set */
         document.getElementById("ayat-range").innerHTML = this.config.start_ayat + " - ";
         document.getElementById("ayat-range").innerHTML += this.config.end_ayat;                
                 
         /** The url used to make the request */
-        var url        = this.config.site_url + "/api/get_verses";
+        let url        = "/api/get_verses";
         /** The parameters for the request */
-        var parameters = {
+        let parameters = {
             "start_ayat" : this.config.start_ayat, 
             "end_ayat" : this.config.end_ayat, 
             "sura" : this.config.sura, 
             "language" : this.config.language, 
             "narrator" : this.config.narrator
         }
-        /** The common navigator related functions */
-        let nav_common = this.config.nav_common;
         /** The callback function */
         let callback   = (response) => {
             /** The callback for formatting the data */
-            let format_callback = (text, ayat_count) => {
+            let format_callback = (text) => {
                 /** The callback for formatting the data */
-                return this.FormatText(text, ayat_count);
+                return this.FormatText(text);
             }
+            
+            /** An object of NavigatorCommon class is created */
+            let nav_common  = new NavigatorCommon(this.config);
             /** The main navigator text is updated */
             nav_common.UpdateMainText(response, format_callback);
         }
         /** The data is fetched from server and the verse list is updated */
-        nav_common.MakeRequest(url, parameters, callback);
+        utilities.MakeRequest(url, parameters, callback, is_async);
     }
     
     /** Used to fetch the meta text for the given ayat */
-    GetAyatMeta (ayat_count) {
-        /** The currently selected index */
-        let index           = document.getElementById("sura-list").selectedIndex;
-        /** The current sura text */
-        let sura_text       = document.getElementById("sura-list").options[index].text;
-        /** The sura text is split on "(" */
-        let temp_arr        = sura_text.split("(");
-        /** The sura text is set */
-        sura_text           = temp_arr[0].trim();
-        
-        /** The verse meta text */
-        let ayat_text       = (this.config.start_ayat*1 + ayat_count);
-        ayat_text           = this.config.sura + ":" + ayat_text;
-        let verse_meta_text = "(" + sura_text + " " + ayat_text + ")";
+    GetAyatMeta (text) {
+    
+        /** The ayat information */
+        let ayat_text = text.sura_id + ":" + text.ayat;
+        /** The meta text */
+        let meta_text = "(" + text.sura_name + " " + ayat_text + ")";
                 
-        return verse_meta_text;
+        return meta_text;
     }
     
     /** Used to format the given text */
-    FormatText (text, ayat_count) {
+    FormatText (text) {
         /** The text template contents are fetched */
         let text_template      = document.getElementById("template-" + this.config.layout).innerHTML;
         /** The verse meta template contents are fetched */
         let meta_template      = document.getElementById("meta-template").innerHTML;
         
         /** The meta text is fetched */
-        let meta_text          = this.GetAyatMeta(ayat_count);
+        let meta_text          = this.GetAyatMeta(text);
         /** The verse meta html */
         let meta_html          = meta_template.replace("[verse-meta]", meta_text);
             

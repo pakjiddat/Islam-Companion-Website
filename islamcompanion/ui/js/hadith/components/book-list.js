@@ -1,5 +1,7 @@
 "use strict";
 
+import { Utilities } from './../../common/utilities.js';
+
 /** The BookList class */
 export class BookList {
 
@@ -10,17 +12,17 @@ export class BookList {
     }
     
     /** Used to update the Hadith book select box */
-    UpdateBookList() {
+    UpdateBookList(is_async) {
         /** The url used to make the request */
-        var url        = this.config.site_url + "/api/get_hadith_books";
+        let url        = "/api/get_hadith_books";
         /** The parameters for the request */
-        var parameters = {
+        let parameters = {
             "source": this.config.source,
             "language": this.config.language
         };
         
-        /** The common navigator related functions */
-        let nav_common = this.config.nav_common;
+        /** An object of Utilities class is created */
+        let utilities = new Utilities();
         
         /** The callback for updating the book list */
         let success = (response) => {
@@ -38,11 +40,11 @@ export class BookList {
                 return option;
             }
             /** The book list is updated */
-            nav_common.PopulateSelectBox("book-list", book_list, this.config.book_id, set_book_options);
+            utilities.PopulateSelectBox("book-list", book_list, this.config.book_id, set_book_options);
         }            
 
         /** The data is fetched from server and the ruku list is updated */
-        nav_common.MakeRequest(url, parameters, success);        
+        utilities.MakeRequest(url, parameters, success, is_async);        
     }  
     
 }

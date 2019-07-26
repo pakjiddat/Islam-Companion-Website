@@ -1,147 +1,14 @@
 "use strict";
 
+import { Utilities } from './../common/utilities.js';
+
 /** The Navigator class */
 export class NavigatorCommon {
 
     /** The constructor */
-    constructor(configuration) {        
+    constructor(configuration) {
         /** The Config object is set as object property */
         this.config = configuration;
-                
-        /** The overlay is recalculated when window is resized */
-        window.addEventListener("resize", () => {
-            if (document.getElementById("overlay").style.display == "block") {
-                this.ShowOverlay();
-            }
-        });
-        /** The overlay is recalculated when window is scrolled */
-        window.addEventListener("scroll", () => {
-            if (document.getElementById("overlay").style.display == "block") {
-                this.ShowOverlay();
-            }
-        });       
-    }
-
-    /** Used to make ajax request to the server */
-    MakeRequest(url, parameters, success) {        
-        /** The Ajax call */
-        $.ajax({
-            method: "POST",
-            url: url,
-            data: parameters,
-            async: false
-		})
-        /** This function is called after data has been loaded */
-        .done(success)
-        .fail(this.Fail);                
-    }
-
-    /** Used to indicate that ajax request has failed */
-    Fail() {
-        alert("Error!");
-    }
-
-    /** Used to display the overlay */
-    ShowOverlay() {       
-        /** The top value for the holy quran navigator */
-        var top     = document.getElementById("navigator-inner").offsetTop;
-        /** The left value for the holy quran navigator */
-        var left    = document.getElementById("navigator-inner").offsetLeft;
-        /** The width value for the holy quran navigator */
-        var width   = document.getElementById("navigator-inner").offsetWidth;
-        /** The height value for the holy quran navigator */
-        var height  = document.getElementById("navigator-inner").offsetHeight;
-        
-        /** If the user is scrolling */
-        if (window.scrollY > 0) {
-            /** The top value for the overlay */
-            document.getElementById("overlay").style.top  = "0px";
-        }
-        /** If the user is not scrolling */
-        else {
-            /** The top value for the overlay */
-            document.getElementById("overlay").style.top  = top + "px";
-        }
-        /** The left value for the overlay */
-        document.getElementById("overlay").style.left     = left + "px";
-        /** The width value for the overlay */
-        document.getElementById("overlay").style.width    = width + "px";
-        /** The height value for the overlay */
-        document.getElementById("overlay").style.height   = height + "px";
-
-        /** The overlay is shown */
-        document.getElementById("overlay").style.display  = "block";
-    }
-
-    /** Used to hide the overlay */
-    HideOverlay() {
-        /** The overlay is shown */
-        document.getElementById("overlay").style.display  = "none";
-    }
-    
-    
-    /** Used to return a range of numbers */
-    Range(start, end) {
-    
-        /** The list of numbers in the range */
-        var number_range = Array();
-        /** Each number in the range is added to the array */
-        for (let count = start; count <= end; count++) {
-            /** The number is added to the range */
-            number_range.push(count);
-        }
-        
-        return number_range;
-    }
-    
-     /** Used to truncate the text to the given number of words */
-    TruncateText(text, max_word_count) {
-        /** The text is split on space */
-        let words          = text.split(" ");
-        /** If the size of the text is less than 20 words, then the function returns the original text */
-        if (words.length < 20) return text;
-        
-        /** The shortened text */
-        let shortened_text = words.slice(0, 20).join(" ");
-        
-        /** The "..." is added to the end of the shortended text */
-        shortened_text     = shortened_text + " ...";
-        
-        return shortened_text
-    }
-    
-    /** Used to populate the given select box */
-    PopulateSelectBox(id, data, selected_value, callback) {
-    
-        /** The select box is emptied */
-        document.getElementById(id).options.length = 0;
-        
-        /** Each data item is added */
-        for (let count = 0; count < data.length; count++) {
-            /** An option element is created */
-            let option   = document.createElement("option");
-            /** If the callback is set, then it is used to set the value of the option */
-            if (callback != "") {
-                option   = callback(option, data[count]);
-            }
-            /** If the callback is not set */
-            else {
-                /** The option value is set */
-                option.value = data[count];
-                /** The option text is set */
-                option.text  = data[count];
-            }
-            /** If the option value matches the given selected value */
-            if (option.value == selected_value) {
-                /** The option is set to selected */
-                option.selected = true;
-            }
-            /** The option is appended to the select box */
-            document.getElementById(id).appendChild(option);
-        }
-        
-        /** The select box value is set */
-        document.getElementById(id).value = selected_value;
     }
     
     /** Used to update the main text */
@@ -155,18 +22,12 @@ export class NavigatorCommon {
         /** The language direction */
         let lang_dir           = "ltr";
         /** If the language is rtl or layout is double column */
-        if (this.config.ltr_langs.indexOf(this.config.language) < 0 || this.config.layout == "double-column") {
+        if (this.config.is_rtl == "yes" || this.config.layout == "double-column") {
             /** The verse text list css class */
-            text_class         = "rtl-list";
-            /** If the language is rtl */
-            if (this.config.ltr_langs.indexOf(this.config.language) < 0) {
-                /** The language direction */
-                lang_dir           = "rtl";
-            }
-        }        
-            
-        /** The language direction is set to application config */
-        this.config.is_rtl     = (lang_dir == "rtl") ? "yes" : "no";
+            text_class = "rtl-list";
+            /** The language direction */
+            lang_dir   = "rtl";
+        }
         /** The css class for the language */
         let lang_css           = "";
         /** If the css class for the language is present */
@@ -227,7 +88,7 @@ export class NavigatorCommon {
     }
     
     /** The search results header is updated */
-    UpdateSearchHeader() {        
+    UpdateSearchHeader() {
         /** The total number of pages */
         let page_count     = Math.ceil(this.config.result_count / this.config.results_per_page);
         /** The search results numbering is set */
@@ -283,12 +144,15 @@ export class NavigatorCommon {
     /** Used to update the search text */
     UpdateSearchText(response, format_callback) {
         
+        /** An object of Utilities class is created */
+        let utilities             = new Utilities();
+        
         /** The response is json decoded */
         response                  = JSON.parse(response);
         
         /** The temporary container */
         let tcontainer            = document.getElementById("temp-container");                      
-        /** The result count is copied to app config */
+        /** The result count is copied to app this.config */
         this.config.result_count  = response.result_count;        
                     
         /** The search results are json encoded */
@@ -324,9 +188,9 @@ export class NavigatorCommon {
             /** The search template is updated */
             tcontainer.innerHTML  = tcontainer.innerHTML.replace("[page_count]", page_count);            
             /** The page number list is set */
-            let page_list         = this.Range(1, page_count);
+            let page_list         = utilities.Range(1, page_count);
             /** The current page number is set */
-            this.config.nav_common.PopulateSelectBox("page-list", page_list, this.config.page_number, "");            
+            utilities.PopulateSelectBox("page-list", page_list, this.config.page_number, null);
             /** The search results header html is set */
             document.getElementById("search-results-header").innerHTML = tcontainer.innerHTML;
             /** The contents of temporary container are set to empty */
@@ -334,21 +198,5 @@ export class NavigatorCommon {
             /** The search results header is updated */
             this.UpdateSearchHeader();
         }        
-    }
-    
-    /** Used to check if the given item id exists in the select box */
-    IsItemPresent(id, select_box_id) {
-
-        /** The select box items */
-        let option_list = document.getElementById(select_box_id).options;
-        /** Each select box item is checked */
-        for (let count = 0; count < option_list.length; count++) {
-            /** An option element is created */
-            let option   = option_list[count];
-            /** If the option value exists */
-            if (option.value == id) return true;
-        }
-        
-        return false;
-    }
+    }    
 }

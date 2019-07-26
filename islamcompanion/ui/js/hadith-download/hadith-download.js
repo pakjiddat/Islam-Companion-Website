@@ -1,28 +1,28 @@
 "use strict";
 
-import { NavigatorCommon } from '../navigator-common.js';
-import { EventHandlers } from './event-handlers.js';
+import { Utilities } from './../common/utilities.js';
 
 /** The HadithDownload class */
-export class HadithDownload extends NavigatorCommon {
+export class HadithDownload {
 
-    /** The constructor */
-    constructor() {
-        /** The parent class constructor is called */
-        super();
-        /** The event handlers object is created */
-        this.event_handlers = new EventHandlers(this);
+    /** Used to register the event handlers */
+    RegisterEventHandlers() {
+        /** The submit button click handler is registered */
+        document.getElementById("download-btn").addEventListener("click", () => {this.SendDownloadLink();});
     }
-
+    
     /** Used to initialize the hadith download form */
     Initialize() {    
         /** The event handlers are registered */
-        this.event_handlers.RegisterEventHandlers();   
+        this.RegisterEventHandlers();   
     }
     
     /** Used to send an email with link to download the hadith database */
     SendDownloadLink() {    
-
+    
+        /** An object of Utilities class is created */
+        let utilities  = new Utilities();
+        
         /** If the email is not valid */
         if (!document.getElementById("email").checkValidity()) {
             /** An alert message is shown */
@@ -32,27 +32,27 @@ export class HadithDownload extends NavigatorCommon {
         }        
         
         /** The overlay is shown */
-        this.ShowOverlay('hadithdownload');
+        utilities.ShowOverlay("hadithdownload-inner");
         
         /** The email address */
-        var email_address     = document.getElementById("email").value;
+        let email_address     = document.getElementById("email").value;
         /** The url used to make the request */
-        var url               = this.site_url + "/hadith-download/email";
+        let url               = "/hadith-download/email";
         /** The parameters for the request */
-        var parameters        = {"email": email_address};
+        let parameters        = {"email": email_address};
         
         /** The callback for displaying the confirmation message */
-        let success    = (response) => {
-            /** The response is json decoded */
-            response   = JSON.parse(response);
-            /** An alert message is shown */
-            alert(response.message);
-        };          
+        let success           = (response) => {
+                                    /** The response is json decoded */
+                                    response   = JSON.parse(response);
+                                    /** An alert message is shown */
+                                    alert(response.message);
+                                };          
 
         /** The data is sent to server */
-        this.MakeRequest(url, parameters, success);
+        utilities.MakeRequest(url, parameters, success);
         
         /** The overlay is hidden */
-        this.HideOverlay();
+        utilities.HideOverlay();
     }
 }

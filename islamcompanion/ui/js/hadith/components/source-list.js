@@ -1,5 +1,7 @@
 "use strict";
 
+import { Utilities } from './../../common/utilities.js';
+
 /** The SourceList class */
 export class SourceList {
 
@@ -10,17 +12,17 @@ export class SourceList {
     }
     
     /** Used to update the Hadith source select box */
-    UpdateSourceList() {
+    UpdateSourceList(is_async) {
+        
+        /** An object of Utilities class is created */
+        let utilities  = new Utilities();      
         /** The url used to make the request */
-        var url        = this.config.site_url + "/api/get_hadith_sources";
+        let url        = "/api/get_hadith_sources";
         /** The parameters for the request */
-        var parameters = {
+        let parameters = {
             "language": this.config.language
         };
-        
-        /** The common navigator related functions */
-        let nav_common = this.config.nav_common;
-        
+
         /** The callback for updating the source list */
         let success = (response) => {
             /** The response is json decoded */
@@ -37,11 +39,10 @@ export class SourceList {
                 return option;
             }
             /** The book list is updated */
-            nav_common.PopulateSelectBox("source-list", source_list, this.config.source, set_source_options);
+            utilities.PopulateSelectBox("source-list", source_list, this.config.source, set_source_options);
         }            
 
         /** The data is fetched from server and the source list is updated */
-        nav_common.MakeRequest(url, parameters, success);        
-    }
-    
+        utilities.MakeRequest(url, parameters, success, is_async);        
+    }    
 }

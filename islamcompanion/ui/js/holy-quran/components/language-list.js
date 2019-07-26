@@ -1,5 +1,7 @@
 "use strict";
 
+import { Utilities } from './../../common/utilities.js';
+
 /** The LanguageList class */
 export class LanguageList {
 
@@ -10,12 +12,14 @@ export class LanguageList {
     }
         
     /** Used to update the language list */
-    UpdateLanguageList () {
-                
+    UpdateLanguageList (is_async) {
+             
+        /** An object of Utilities class is created */
+        let utilities  = new Utilities();                
         /** The url used to make the request */
-        var url        = this.config.site_url + "/api/get_languages";
+        let url        = "/api/get_languages";
         /** The parameters for the request */
-        var parameters = {};
+        let parameters = {};
         
         /** The callback for updating the language list */
         let success = (response) => {
@@ -32,15 +36,11 @@ export class LanguageList {
                 
                 return option;
             }
-            /** The common navigator related functions */
-            let nav_common = this.config.nav_common;
             /** The language list is updated */
-            nav_common.PopulateSelectBox("language-list", language_list, this.config.language, set_language_options);
+            utilities.PopulateSelectBox("language-list", language_list, this.config.language, set_language_options);
         }            
 
-        /** The common navigator related functions */
-        let nav_common = this.config.nav_common;
         /** The data is fetched from server and the language list is updated */
-        nav_common.MakeRequest(url, parameters, success);
+        utilities.MakeRequest(url, parameters, success, is_async);
     }
 }

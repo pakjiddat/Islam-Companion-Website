@@ -1,5 +1,7 @@
 "use strict";
 
+import { Utilities } from './utilities.js';
+
 /** The Subscription class */
 export class Subscription {
 
@@ -12,6 +14,8 @@ export class Subscription {
     /** Used to add a subscriber */
     AddSubscriber(type) {    
 
+        /** An object of Utilities class is created */
+        let utilities          = new Utilities();
         /** If the email is not valid */
         if (!document.getElementById("email-address").checkValidity()) {
             /** An alert message is shown */
@@ -20,15 +24,10 @@ export class Subscription {
             return;
         }
 
-        /** The common navigator related functions */
-        let nav_common      = this.config.nav_common; 
-        /** The overlay is shown */
-        nav_common.ShowOverlay();
-        
         /** The email address */
         let email_address     = document.getElementById("email-address").value;
         /** The url used to make the request */
-        let url               = this.config.site_url + "/subscribe/add";
+        let url               = "/subscribe/add";
         /** Indicates if language is rtl */
         let is_rtl            = this.config.is_rtl;
         
@@ -43,10 +42,10 @@ export class Subscription {
             subscription_type      = "Holy Quran";            
             /** The narrator and language */
             extra                  = {
-                                      "narrator" : document.getElementById("narrator-list").value,
-                                      "language" : document.getElementById("language-list").value,
-                                      "is_rtl" : is_rtl
-                                    };
+                                       "narrator" : document.getElementById("narrator-list").value,
+                                       "language" : document.getElementById("language-list").value,
+                                       "is_rtl" : is_rtl
+                                     };
         }
         /** If the subscription type is hadith */
         else if (type == "hadith") {
@@ -54,9 +53,9 @@ export class Subscription {
             subscription_type = "Hadith";            
             /** The language */
             extra             = {
-                                      "language" : document.getElementById("language-list").value,
-                                      "is_rtl" : is_rtl
-                                    };
+                                  "language" : document.getElementById("language-list").value,
+                                  "is_rtl" : is_rtl
+                                };
         }
                                             
         /** The JSON object is converted to a string */
@@ -77,9 +76,6 @@ export class Subscription {
         };          
 
         /** The data is sent to server */
-        nav_common.MakeRequest(url, parameters, success);
-        
-        /** The overlay is hidden */
-        nav_common.HideOverlay();
+        utilities.MakeRequest(url, parameters, success, true);
     }
 }

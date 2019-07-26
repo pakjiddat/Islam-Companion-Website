@@ -12,7 +12,7 @@
   <li>It has a reader that displays Holy Quran verses</li>
   <li>It has a reader that displays Hadith text</li>
   <li>It allows users to get Quranic verses and Hadith by email</li>
-  <li>It allows downloading Hadith database in <b>.sql</b> format</li>
+  <li>It allows downloading Hadith database in <b>.sql</b> <b>.sqlite</b> formats</li>
   <li>It allows users of the website to send a message to the website administrator</li>
   <li>The source code is available under <a href='https://github.com/nadirlc/islam-companion-website/blob/master/LICENSE'>GPL License</a></li>
   <li>The source code is well commented, modular and easy to update</li>
@@ -34,6 +34,7 @@
 <p>The following steps can be used to install the "Islam Companion" project on your own server:</p>
 <div>
   <ul>
+    <li>Install the <a href='https://github.com/nadirlc/islam-companion-web-api'>Islam Companion API</a></li>
     <li>Download the <a href='https://github.com/nadirlc/islam-companion-website/archive/master.zip'>source code</a> from GitHub</li>
     <li>Move the source code to the document root of a virtual host</li>
     <li>Download the contents of the database from: <a href='https://islamcompanion.pakjiddat.pk/islamcompanion/data/islamcompanion-website.sql.tar.bz2'>here</a></li>

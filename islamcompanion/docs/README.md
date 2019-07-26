@@ -12,7 +12,7 @@
   <li>It has a reader that displays Holy Quran verses</li>
   <li>It has a reader that displays Hadith text</li>
   <li>It allows users to get Quranic verses and Hadith by email</li>
-  <li>It allows downloading Hadith database in <b>.sql</b> format</li>
+  <li>It allows downloading Hadith database in <b>.sql</b> <b>.sqlite</b> formats</li>
   <li>It allows users of the website to send a message to the website administrator</li>
   <li>The source code is available under <a href='https://github.com/nadirlc/islam-companion-website/blob/master/LICENSE'>GPL License</a></li>
   <li>The source code is well commented, modular and easy to update</li>

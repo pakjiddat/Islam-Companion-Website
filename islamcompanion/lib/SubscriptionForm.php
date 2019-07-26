@@ -61,7 +61,7 @@ class SubscriptionForm
             /** The sql query for adding subscriber */       
             $sql            = "INSERT INTO " . $table_name . " (type, email, extra, updated_on) VALUES(?,?,?,?)";
             /** The query parameters */
-            $query_params   = array($type, $extra, time(), $email);            
+            $query_params   = array($type, $email, $extra, time());
         }      
         
         /** The row is added */

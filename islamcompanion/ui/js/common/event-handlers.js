@@ -1,24 +1,26 @@
 "use strict";
 
+import { Utilities } from './utilities.js';
+
 /** The CommonEventHandlers class */
 export class CommonEventHandlers {
 
     /** The constructor */
     constructor(SearchClass, navigator, configuration) {
-        /** The navigator object is set as object property */
-        this.navigator = navigator;
+        
         /** The Config object is set as object property */
         this.config    = configuration;
+        /** The Navigator object is set as object property */
+        this.navigator = navigator;
         /** The Search object is created and set as object property */            
         this.search    = new SearchClass(this, this.config);
     }
         
     /** Used to register the event handlers for elements common to holy quran and hadith navigators */
     RegisterCommonEventHandlers() {
-        /** The next button click handler is registered */
-        document.getElementById("next").addEventListener("click", () => {this.HandleEvent("next");});
-        /** The prev button click handler is registered */
-        document.getElementById("prev").addEventListener("click", () => {this.HandleEvent("prev");});
+        
+        /** The event handlers for next/prev buttons are registered */
+        this.RegisterNextPrevEventHandlers();            
         /** The random button click handler is registered */
         document.getElementById("random").addEventListener("click", () => {this.HandleEvent("random");});        
         /** The search button click handler is registered */
@@ -53,8 +55,49 @@ export class CommonEventHandlers {
         });
     }
     
+    /** Used to register event handlers for next, previous buttons */
+    RegisterNextPrevEventHandlers() {
+    
+        /** The title of the button */
+        let btn_title = "";
+        /** If the navigator type is hadith */
+        if (this.config.type == "hadith")
+            btn_title = " Hadith";
+        else
+            btn_title = " Ruku";
+        
+        /** The event listners are removed */
+        document.getElementById("next").outerHTML = document.getElementById("next").outerHTML;
+        /** The event listners are removed */
+        document.getElementById("prev").outerHTML = document.getElementById("prev").outerHTML;
+        
+        /** If the language direction is ltr */
+        if (this.config.is_rtl == "no") {  
+            /** The next button click handler is registered */
+            document.getElementById("next").addEventListener("click", () => {this.HandleEvent("prev");});
+            /** The prev button click handler is registered */
+            document.getElementById("prev").addEventListener("click", () => {this.HandleEvent("next");});
+            /** The next button title is set to "Previous" */
+            document.getElementById("next").title = "Previous" + btn_title;
+            /** The previous button title is set to "Next" */
+            document.getElementById("prev").title = "Next" + btn_title;
+        }
+        /** If the language direction is rtl */
+        else {                            
+            /** The next button click handler is registered */
+            document.getElementById("next").addEventListener("click", () => {this.HandleEvent("next");});
+            /** The prev button click handler is registered */
+            document.getElementById("prev").addEventListener("click", () => {this.HandleEvent("prev");});
+            /** The next button title is set to "Next" */
+            document.getElementById("next").title = "Next" + btn_title;
+            /** The previous button title is set to "Previous" */
+            document.getElementById("prev").title = "Previous" + btn_title;
+        }
+    }
+    
     /** Used to register event handlers for next, previous and page list controls */
     RegisterSearchEventHandlers(lang_dir) {
+        
         /** If the language direction is ltr */
         if (lang_dir == "ltr") {
             /** The next page button click handler is registered */
@@ -87,6 +130,7 @@ export class CommonEventHandlers {
     
     /** Used the handle the search action */
     HandleSearch(action) {    
+        
         /** If the search box has some text */
         if (document.getElementById('search-text').value != '') {
             /** The total number of pages */
@@ -127,6 +171,7 @@ export class CommonEventHandlers {
         
     /** Used to fetch navigator configuration */
     UpdateUiComponents(url, params, action) {        
+        
         /** The callback for updating the Holy Quran Navigator configuration */
         let success = (response) => {
             /** The response is json decoded */
@@ -139,7 +184,9 @@ export class CommonEventHandlers {
             this.navigator.LoadNavigator(components);
         }
 
+        /** An object of Utilities class is created */
+        let utilities = new Utilities();
         /** The navigator configuration is fetched from server and the ui components are updated */
-        this.config.nav_common.MakeRequest(url, params, success);
+        utilities.MakeRequest(url, params, success);
     }
 }

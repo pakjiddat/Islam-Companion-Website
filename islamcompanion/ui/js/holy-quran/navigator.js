@@ -25,16 +25,12 @@ export class HolyQuranNavigator {
         /** The event handlers are registered */
         this.event_handlers.RegisterEventHandlers();
         /** The navigator is loaded */
-        this.LoadNavigator("all");         
+        this.LoadNavigator("all", true);         
     }
 
     /** Used to load the navigator */
-    LoadNavigator(components) {
-        /** The common navigator related functions */
-        let nav_common      = this.config.nav_common;
-        /** The overlay is shown */
-        nav_common.ShowOverlay();
-        
+    LoadNavigator(components, is_async) {
+
         /** If the division list needs to be updated */
         if (components.indexOf("all") >=0 || components.indexOf("division") >= 0) {
             /** The DivisionList class object is created */
@@ -48,7 +44,7 @@ export class HolyQuranNavigator {
             /** The SuraList class object is created */
             let sl = new SuraList(this.config);
             /** The sura list is updated */
-            sl.UpdateSuraList();
+            sl.UpdateSuraList(is_async);
         }
         
         /** If the ruku list needs to be updated */
@@ -56,7 +52,11 @@ export class HolyQuranNavigator {
             /** The RukuList class object is created */
             let rl = new RukuList(this.config);
             /** The ruku list is updated */
-            rl.UpdateRukuList();
+            rl.UpdateRukuList(is_async);
+            /** The AudioFile class object is created */
+            let af = new AudioFile(this.config);                   
+            /** The audio file url is updated */
+            af.UpdateAudioFileUrl();
         }
         
         /** If the verse text needs to be updated */
@@ -64,7 +64,7 @@ export class HolyQuranNavigator {
             /** The VerseText class object is created */
             let vt = new VerseText(this.config);
             /** The verse text is updated */
-            vt.UpdateVerseText();
+            vt.UpdateVerseText(is_async);
         }
         
         /** If the language list needs to be updated */
@@ -72,7 +72,7 @@ export class HolyQuranNavigator {
             /** The LanguageList class object is created */
             let ll = new LanguageList(this.config);       
             /** The language list is updated */
-            ll.UpdateLanguageList();
+            ll.UpdateLanguageList(is_async);
         }
         
         /** If the narrator list needs to be updated */
@@ -80,7 +80,7 @@ export class HolyQuranNavigator {
             /** The NarratorList class object is created */
             let nl = new NarratorList(this.config);       
             /** The narrator list is updated */
-            nl.UpdateNarratorList();
+            nl.UpdateNarratorList(is_async);
         }
         
         /** If all components need to be updated */
@@ -88,14 +88,6 @@ export class HolyQuranNavigator {
             /** The layout select box value is set */
             document.getElementById("layout-list").value = this.config.layout;
         }
-        
-        /** The AudioFile class object is created */
-        let af = new AudioFile(this.config);                   
-        /** The audio file url is updated */
-        af.UpdateAudioFileUrl();
-        
-        /** The overlay is hidden */
-        nav_common.HideOverlay();
         
         /** The current configuration is saved to local browser storage */
         this.config.SaveConfig();

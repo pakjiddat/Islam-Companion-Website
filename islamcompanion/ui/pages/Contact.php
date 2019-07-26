@@ -76,7 +76,7 @@ class Contact extends BasePage
         $text             = <<< EOT
         
         
-    Hello Admin !. The following contact request was sent from Pak Jiddat website:
+    Hello Admin !. The following contact request was sent from Islam Companion website:
         
     Name: $name
     Email: $email

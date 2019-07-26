@@ -1,5 +1,7 @@
 "use strict";
 
+import { Utilities } from './../../common/utilities.js';
+
 /** The SuraList class */
 export class SuraList {
 
@@ -10,12 +12,15 @@ export class SuraList {
     }
         
     /** Used to update the sura list */
-    UpdateSuraList () {
+    UpdateSuraList(is_async) {
                 
+        /** An object of Utilities class is created */
+        let utilities  = new Utilities();
+        
         /** The url used to make the request */
-        var url        = this.config.site_url + "/api/get_suras_in_division";
+        let url        = "/api/get_suras_in_division";
         /** The parameters for the request */
-        var parameters = {
+        let parameters = {
             "division": this.config.division, 
             "div_num": this.config.div_num
         };
@@ -35,14 +40,10 @@ export class SuraList {
                 
                 return option;
             }
-            /** The common navigator related functions */
-            let nav_common      = this.config.nav_common;            
             /** The sura list is updated */
-            nav_common.PopulateSelectBox("sura-list", sura_list, this.config.sura, set_sura_options);
+            utilities.PopulateSelectBox("sura-list", sura_list, this.config.sura, set_sura_options);
         }            
-        /** The common navigator related functions */
-        let nav_common      = this.config.nav_common;
         /** The data is fetched from server and the sura list is updated */
-        nav_common.MakeRequest(url, parameters, success);
+        utilities.MakeRequest(url, parameters, success, is_async);
     }
 }

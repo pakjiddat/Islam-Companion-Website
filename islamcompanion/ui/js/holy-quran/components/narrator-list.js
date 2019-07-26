@@ -1,5 +1,7 @@
 "use strict";
 
+import { Utilities } from './../../common/utilities.js';
+
 /** The NarratorList class */
 export class NarratorList {
 
@@ -10,13 +12,16 @@ export class NarratorList {
     }
         
     /** Used to update the narrator list */
-    UpdateNarratorList () {
+    UpdateNarratorList (is_async) {
                    
+        /** An object of Utilities class is created */
+        let utilities  = new Utilities();
+        
         /** The url used to make the request */
-        var url        = this.config.site_url + "/api/get_narrators";
+        let url        = "/api/get_narrators";
         /** The parameters for the request */
-        var parameters = {
-            "language": this.config.language
+        let parameters = {
+            "language": document.getElementById("language-list").value
         };
         
         /** The callback for updating the narrator list */
@@ -28,7 +33,7 @@ export class NarratorList {
             /** If the current narrator is not in the list of returned narrators */
             if (narrator_list.indexOf(this.config.narrator) < 0) {
                 /** The current narrator is set to the first narrator */
-                this.config.narrator         = narrator_list[0];
+                this.config.narrator     = narrator_list[0];
             }
             /** arrow function used to set the narrator select box options */
             let set_narrator_options     = (option, data) => {
@@ -39,15 +44,11 @@ export class NarratorList {
                 
                 return option;
             }
-            /** The common navigator related functions */
-            let nav_common = this.config.nav_common;
             /** The narrator list is updated */
-            nav_common.PopulateSelectBox("narrator-list", narrator_list, this.config.narrator, set_narrator_options);
+            utilities.PopulateSelectBox("narrator-list", narrator_list, this.config.narrator, set_narrator_options);
         }            
 
-        /** The common navigator related functions */
-        let nav_common = this.config.nav_common;
         /** The data is fetched from server and the narrator list is updated */
-        nav_common.MakeRequest(url, parameters, success);
+        utilities.MakeRequest(url, parameters, success, is_async);
     }
 }

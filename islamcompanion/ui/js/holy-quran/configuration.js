@@ -12,7 +12,7 @@ export class Config {
         /** The current sura ruku id */
         this.sura_ruku        = "1";
         /** The current sura id */
-        this.sura             = "1";        
+        this.sura             = "1";
         /** The narrator */
         this.narrator         = "Abul A'ala Maududi";
         /** The language */
@@ -42,21 +42,7 @@ export class Config {
         /** The total result count */
         this.result_count     = 0;
         /** Indicates if the language is rtl */
-        this.is_rtl           = "yes";      
-        /** Indicates if the website is in development mode */
-        this.dev_mode         = true;
-        /** If the website is in development mode */
-        if (this.dev_mode) {
-            /** The site url is set */
-            this.site_url     = "http://dev.islamcompanion.pakjiddat.pk";
-        }
-        /** If the website is in production mode */
-        else {
-            /** The site url is set */
-            this.site_url     = "https://islamcompanion.pakjiddat.pk";
-        }
-        /** An object of class NavigatorCommon */
-        this.nav_common       = "";
+        this.is_rtl           = "yes";
         /** The current navigator type */
         this.type             = "quran";
     }

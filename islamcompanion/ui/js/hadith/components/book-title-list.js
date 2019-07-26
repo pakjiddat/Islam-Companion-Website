@@ -1,5 +1,7 @@
 "use strict";
 
+import { Utilities } from './../../common/utilities.js';
+
 /** The BookTitleList class */
 export class BookTitleList {
 
@@ -10,17 +12,17 @@ export class BookTitleList {
     }
     
     /** Used to update the Hadith title select box */
-    UpdateBookTitleList() {
+    UpdateBookTitleList(is_async) {
         /** The url used to make the request */
-        var url        = this.config.site_url + "/api/get_hadith_titles";
+        let url        = "/api/get_hadith_titles";
         /** The parameters for the request */
-        var parameters = {
+        let parameters = {
             "book_id": this.config.book_id,
             "language": this.config.language
         };
         
-        /** The common navigator related functions */
-        let nav_common = this.config.nav_common;
+        /** An object of Utilities class is created */
+        let utilities  = new Utilities();
         
         /** The callback for updating the title list */
         let success = (response) => {
@@ -35,16 +37,16 @@ export class BookTitleList {
                 /** The option text is set */
                 option.text     = data.title;
                 /** The option text is truncated to max allowed words */
-                option.text     = nav_common.TruncateText(data.title, this.config.max_word_count);
+                option.text     = utilities.TruncateText(data.title, this.config.max_word_count);
                 
                 return option;
             }
             /** The title list is updated */
-            nav_common.PopulateSelectBox("title-list", title_list, this.config.title_id, set_title_options);
+            utilities.PopulateSelectBox("title-list", title_list, this.config.title_id, set_title_options);
         }            
 
         /** The data is fetched from server and the hadith navigator configuration is updated */
-        nav_common.MakeRequest(url, parameters, success);        
+        utilities.MakeRequest(url, parameters, success, is_async);        
     }
     
 }

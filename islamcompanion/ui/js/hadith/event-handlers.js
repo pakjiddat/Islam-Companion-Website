@@ -1,8 +1,9 @@
 "use strict";
 
-import { Search } from './search.js';
+import { Search } from './components/search.js';
 import { Subscription } from './../common/subscription.js';
 import { CommonEventHandlers } from './../common/event-handlers.js';
+import { Utilities } from './../common/utilities.js';
 
 /** The EventHandlers class */
 export class EventHandlers extends CommonEventHandlers {
@@ -68,8 +69,12 @@ export class EventHandlers extends CommonEventHandlers {
             }
             /** If the current source value is same as the new source value */
             else {
+            
+                /** An object of Utilities class is created */
+                let utilities  = new Utilities();
+        
                 /** If the new book id is not in select box */
-                if (!this.config.nav_common.IsItemPresent(this.config.book_id, "book-list")) {
+                if (!utilities.IsItemPresent(this.config.book_id, "book-list")) {
                     /** The book and title list components are marked for update */
                     components        += ",book,title";
                 }
@@ -84,7 +89,7 @@ export class EventHandlers extends CommonEventHandlers {
                     document.getElementById("book-list").value = this.config.book_id;
                 }
                 /** If the new title id is not in select box */
-                if (!this.config.nav_common.IsItemPresent(this.config.title_id, "title-list")) {
+                if (!utilities.IsItemPresent(this.config.title_id, "title-list")) {
                     /** The title list component is marked for update */
                     components        += ",title";
                 }
@@ -133,6 +138,17 @@ export class EventHandlers extends CommonEventHandlers {
         else if (action == "language_box") {
             /** The current language is set to the selected language */
             this.config.language  = document.getElementById("language-list").value;
+            /** If the language is rtl */
+            if (this.config.ltr_langs.indexOf(this.config.language) < 0) {
+                /** The language direction is set to rtl */
+                this.config.is_rtl = "yes";
+            }
+            /** The language direction is set to rtl */
+            else {
+                this.config.is_rtl = "no";
+            }
+            /** The button event handlers are registered again */
+            this.RegisterNextPrevEventHandlers();
         }
     }
     
@@ -150,7 +166,7 @@ export class EventHandlers extends CommonEventHandlers {
         }
         else {
             /** The url used to make the request */
-            var url            = this.config.site_url + "/api/get_hadith_nav_config";
+            var url            = "/api/get_hadith_nav_config";
             /** The app config is updated */
             this.UpdateAppConfig(action);
             /** The parameters for the request */
