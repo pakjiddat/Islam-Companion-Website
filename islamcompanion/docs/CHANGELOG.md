@@ -2,6 +2,10 @@
 
 Changelog for Islam Companion Website:
 
+**1.0.2 (August 24, 2019)**
+* Corrected problems with displaying text in correct font
+* Used preloading for loading font files
+
 **1.0.1 (July 26, 2019)**
 * Corrected errors in contact page
 * Corrected errors in hadith download page
