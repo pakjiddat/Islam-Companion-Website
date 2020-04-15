@@ -1,7 +1,7 @@
-<p><img class="img-fluid" src="https://www.pakjiddat.pk/pakjiddat/ui/images/islamcompanion-website.png" alt="Islam Companion Website" /></p>
+<p><img class="img-fluid" src="https://pakjiddat.netlify.com/static/bb4af7aa33b79483a675f47d6f1c6d10/d9199/islamcompanion-website.png" alt="Islam Companion Website" /></p>
 
 <h3>Introduction</h3>
-<p>The "<b>Islam Companion website</b>" project is a website that allows users to read Holy Quran and Hadith text. It also allows users to subscribe to Holy Quran and Hadith by email. An example of the Islam Companion website is the <a href='https://islamcompanion.pakjiddat.pk/'>Islam Companion website</a></p>
+<p>The "<b>Islam Companion website</b>" project is a website that allows users to read Holy Quran and Hadith text. It also allows users to subscribe to Holy Quran and Hadith by email.</p>
 
 <p>The goal of the Islam Companion website is to provide a basic website that displays Holy Quran and Hadith data. The user may customize this website according to their requirements.</p>
 
@@ -37,7 +37,7 @@
     <li>Install the <a href='https://github.com/nadirlc/islam-companion-web-api'>Islam Companion API</a></li>
     <li>Download the <a href='https://github.com/nadirlc/islam-companion-website/archive/master.zip'>source code</a> from GitHub</li>
     <li>Move the source code to the document root of a virtual host</li>
-    <li>Download the contents of the database from: <a href='https://islamcompanion.pakjiddat.pk/islamcompanion/data/islamcompanion-website.sql.tar.bz2'>here</a></li>
+    <li>Download the contents of the database from: <a href='https://drive.google.com/open?id=1Lq0xjVPiTso1io-uhKxz7aT7McIlBwj6'>here</a></li>
     <li>Extract the downloaded file</li>
     <li>Create a database and import the contents of the sql file to the database. Note down the credentials used for connecting to the database</li>
     <li>Enter the database credentials in the file <b>islamcompanion/config/RequiredObjects.php</b></li>
