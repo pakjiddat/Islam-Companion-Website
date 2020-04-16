@@ -1,4 +1,4 @@
-<p><img class="img-fluid" src="https://pakjiddat.netlify.com/static/bb4af7aa33b79483a675f47d6f1c6d10/d9199/islamcompanion-website.png" alt="Islam Companion Website" /></p>
+<p><img class="img-fluid" src="https://pakjiddat.netlify.app/static/bb4af7aa33b79483a675f47d6f1c6d10/d9199/islamcompanion-website.png" alt="Islam Companion Website" /></p>
 
 <h3>Introduction</h3>
 <p>The "<b>Islam Companion website</b>" project is a website that allows users to read Holy Quran and Hadith text. It also allows users to subscribe to Holy Quran and Hadith by email.</p>
